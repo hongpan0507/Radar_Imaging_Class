@@ -1,2 +1,2 @@
-# Radar_Imaging-_Class
+# Radar_Imaging_Class
 Spring 2020
