@@ -1,47 +1,53 @@
 import numpy as np
 from scipy.constants import c, pi
 from scipy import signal as sig
-import matplotlib.pyplot as plt
-from Waveform_Gen import prop_delay
+from matplotlib import pyplot as plt
+from matplotlib import ticker as mtick
+from Waveform_Gen import prop_delay, LFM, matched_filter, zero_pad
+
+# before padding
+F_0 = 1e3
+F_s = 10e3
+T_s = 1/F_s
+nSample = int(20/F_0/T_s)
+t = np.arange(0, nSample)*T_s
+x_t = np.cos(2*pi*F_0*t)
+x_f = np.fft.fft(x_t)
+x_f = np.fft.fftshift(x_f)
+freq = np.fft.fftfreq(t.size, T_s)
+freq = np.fft.fftshift(freq)
 
 
-T_p = 1  # pulse width
-BW = 5e2    # bandwidth
-F_s = 200*BW   # ADC sampling frequency
-T_s = 1/F_s     # ADC sampling period
-nSample = int(T_p*F_s)   # number of samples from ADC
-chp_rt = BW/T_p   # chirp rate
-t = np.arange(0, nSample, 1)*T_s      # (start, stop, step)
-phase = -2*pi*BW/2*t+pi*chp_rt*np.sqrt(t)
-freq = -BW/2+chp_rt*t
-x_t = np.cos(phase)    # un-windowed signal
+fig, ax = plt.subplots(2, 1)
+ax[0].plot(t, x_t)
+ax[0].set_xlabel("Time (s)")
+ax[0].set_ylabel("Amp")
+ax[0].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 
-# win_len = int(t.size*0.2)
-# window = sig.hamming(win_len)
-# pad_w = int((t.size - win_len)/2)
-# window = np.pad(window, (pad_w, pad_w), 'constant', constant_values=0)      # pad the size of the window to be the same as t
-#
-# x_t = x_t*window    # windowed signal
+ax[1].plot(freq, np.abs(x_f))
+ax[1].set_xlabel("Freq (Hz)")
+ax[1].set_ylabel("Amp")
+ax[1].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 
-fig = plt.figure()
-plt.suptitle("LFM" + ", Chirp Rate = " + str(chp_rt) + "Hz/s, BW = " + str(BW) + "Hz, PW = " + str(T_p) + "s")
+# after padding
+x_t_p, t_p, pad_s = zero_pad(x_t, t, T_s)
+x_f_p = np.fft.fft(x_t_p)
+x_f_p = np.fft.fftshift(x_f_p)
+freq_p = np.fft.fftfreq(t_p.size, T_s)
+freq_p = np.fft.fftshift(freq_p)
 
-ax1 = plt.subplot(3, 1, 1)
-ax1.plot(t, x_t)
-ax1.set_xlabel("Time (s)")
-plt.title("Waveform")
 
-ax2 = plt.subplot(3, 1, 2)
-ax2.plot(t, phase)
-ax2.set_xlabel("Time (s)")
-ax2.set_ylabel("Phase (Radian)")
-plt.title("Phase")
+fig, ax = plt.subplots(2, 1)
+ax[0].plot(t_p, x_t_p)
+ax[0].set_xlabel("Time (s)")
+ax[0].set_ylabel("Amp")
+ax[0].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 
-ax3 = plt.subplot(3, 1, 3)
-ax3.plot(t, freq)
-ax3.set_xlabel("Time (s)")
-ax3.set_ylabel("Freq (Hz)")
-plt.title("Frequency")
+ax[1].plot(freq_p, np.abs(x_f_p))
+ax[1].set_xlabel("Freq (Hz)")
+ax[1].set_ylabel("Amp")
+ax[1].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 
-plt.subplots_adjust(hspace=0.5)
 plt.show()
+# after padding
+
