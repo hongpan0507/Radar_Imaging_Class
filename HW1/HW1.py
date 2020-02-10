@@ -22,26 +22,28 @@ G = 100    # Antenna Gain = 30dB
 F_0 = 10e9   # 9GHz carrier frequency
 w_len = c/F_0   # wave length
 RCS = 10        # radar cross section
-R_t = 100e3       # target range
+R_t = 5e3       # target range
 alpha = np.sqrt((G**2 * w_len**2 * RCS) / ((4*pi)**3 * R_t**4))     # Radar equation
-pha_rand = np.random.random()*2*pi      # constant random phase factor
+pha_rand = np.random.normal(0, 1, 1)*2*pi      # random.normal(mean, std, size); constant random phase factor
+# RN_PWR = 8.4e-11    # noise power
+RN_mean = 0
+RN_std = 15e-9    # noise power
 tau = 2*R_t/c      # propagation time delay
+print(tau)
 
 x_t, t = LFM(BW, F_s, T_p, plot=False)    # un-windowed TX waveform
 x_t_w = x_t * sig.windows.hann(t.size)       # windowed TX waveform
 
-
 t_tol = T_p + t_f + T_p         # time(pulse completely out of TX) + time travel + time(pulse completely back to RX)
 nSample = int(t_tol/T_s)        # ADC samples
 t_abs = np.arange(0, nSample, 1)*T_s    # absolute time scale for RX signal
+R_abs = t_abs*c/2   # range
 x_t_abs = np.zeros(nSample, dtype=complex)             # building RX signal
 x_t_abs[0:t.size] = x_t_abs[0:t.size] + x_t_w   # add windowed waveform to the signal to simulate TX signal
 x_t_rx = alpha * np.exp(1j*pha_rand) * prop_delay(x_t_abs, t_abs, tau, t_i, F_s)   # time delayed signal or received waveform
-RN_PWR = 8.4e-11    # noise power
-# RN = np.random.random(x_t_rx.size) * RN_PWR * (1+1j)   # random noise; scaled down based on the RX power; affects I and Q equally
-# x_t_rx = x_t_rx + RN      # adding noise
-RN_I = np.random.random(x_t_rx.size) * RN_PWR   # random noise; scaled down based on the RX power; affects I
-RN_Q = np.random.random(x_t_rx.size) * RN_PWR * 1j   # random noise; scaled down based on the RX power; affects Q
+
+RN_I = np.random.normal(RN_mean, RN_std, x_t_rx.size)   # adding white noise; scaled down based on the RX power; affects I
+RN_Q = np.random.normal(RN_mean, RN_std, x_t_rx.size) * 1j  # adding white noise; scaled down based on the RX power; affects I
 x_t_rx = x_t_rx + RN_I + RN_Q   # adding noise
 
 MFO = matched_filter(x_t_w, x_t_rx)
@@ -54,19 +56,26 @@ ax[0].set_ylabel("Amp")
 ax[0].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 ax[0].set_title("TX waveform")
 
-ax[1].plot(t_abs, x_t_rx.real, color='r')
-ax[1].plot(t_abs, x_t_rx.imag, color='b')
+ax[1].plot(R_abs, x_t_rx.real, color='r')
+ax[1].plot(R_abs, x_t_rx.imag, color='b')
 ax[1].set_xlabel("Time (s)")
 ax[1].set_ylabel("Amp")
 ax[1].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 ax[1].yaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 ax[1].set_title("delayed waveform")
 
-ax[2].plot(t_abs, np.abs(MFO))
+ax[2].plot(R_abs, np.abs(MFO))
 ax[2].set_xlabel("Time (s)")
 ax[2].set_ylabel("Amp")
 ax[2].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 ax[2].yaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 plt.subplots_adjust(hspace=0.5)
+
+# ax[3].plot(t_abs, np.gradient(np.angle(MFO), t_abs))
+# ax[3].set_xlabel("Time (s)")
+# ax[3].set_ylabel("Amp")
+# ax[3].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
+# ax[3].yaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
+# plt.subplots_adjust(hspace=0.5)
 
 plt.show()

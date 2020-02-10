@@ -32,10 +32,10 @@ def LFM(BW, F_s, T_p, plot = False):
     # freq = -BW / 2 + chp_rt * t       # for testing only
     # x_t = np.cos(phase)  # un-windowed signal
     x_t = np.exp(1j*phase)  # un-windowed signal
-    x_f = np.fft.fft(x_t)  # frequency content of signal x
-    x_f = np.fft.fftshift(x_f)  # re-align frequency content
-    freq = np.fft.fftfreq(t.shape[-1], 1 / F_s)  # set up frequency axis
-    freq = np.fft.fftshift(freq)  # re-align frequency axis
+    # x_f = np.fft.fft(x_t)  # frequency content of signal x
+    # x_f = np.fft.fftshift(x_f)  # re-align frequency content
+    # freq = np.fft.fftfreq(t.shape[-1], 1 / F_s)  # set up frequency axis
+    # freq = np.fft.fftshift(freq)  # re-align frequency axis
 
     if plot:
         fig = plt.figure()
@@ -67,12 +67,12 @@ def LFM(BW, F_s, T_p, plot = False):
         ax1.xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
         plt.title("Frequency")
         
-        sub_plt_i += 1
-        ax1 = plt.subplot(sub_plt_row, sub_plt_col, sub_plt_i)
-        ax1.plot(freq, np.abs(x_f))
-        ax1.set_xlabel("Time (s)")
-        ax1.set_ylabel("Freq (Hz)")
-        plt.title("Frequency")
+        # sub_plt_i += 1
+        # ax1 = plt.subplot(sub_plt_row, sub_plt_col, sub_plt_i)
+        # ax1.plot(freq, np.abs(x_f))
+        # ax1.set_xlabel("Time (s)")
+        # ax1.set_ylabel("Freq (Hz)")
+        # plt.title("Frequency")
 
         plt.subplots_adjust(hspace=0.5)
         plt.show()
