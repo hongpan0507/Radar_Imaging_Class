@@ -1,37 +1,50 @@
 import numpy as np
+from numpy.fft import fft, fftshift, fftfreq
 from scipy.constants import c, pi
 from scipy import signal as sig
 from matplotlib import pyplot as plt
 from matplotlib import ticker as mtick
 from matplotlib import cm as cm
-from Waveform_Gen import prop_delay, LFM, matched_filter, zero_pad
+from Waveform_Gen import prop_delay, LFM, matched_filter, zero_pad, propagation
 
 
-# ADC parameters; PRI
-F_D = 0     # doppler shift
-T_p = 5e-6      # pulse width
-BW = 50e6       # bandwidth
-F_s = 2*BW      # ADC sampling frequency
-T_s = 1/F_s     # ADC sampling period
-T_PRI = 1e-3    # Pulse repetition interval
+# ------------------ Processor parameters ------------------------------------------------------------------------------
+F_D = 0             # doppler shift
+T_p = 5e-6          # pulse width
+BW = 50e6           # LFM bandwidth
+F_s = 2*BW          # ADC sampling frequency
+T_s = 1/F_s         # ADC sampling period
+T_PRI = 100e-6      # Pulse repetition interval; max unambigous velocity = wave_len/4/T_PRI = 750m/s
 pulse_num = 100     # number of pulses
 
-# Physical parameters
-R_min = 0     # minimum range of interest
-R_max = 10e3    # maximum range of interest
+# -------------------- Physical parameters -----------------------------------------------------------------------------
+# Range and velocity
+R_min = 0           # minimum range of interest
+R_max = 15e3        # maximum range of interest; max unambigous range = speed of light * T_PRI/2 = 1.5km
 t_i = 2*R_min/c     # time to reach to minimum range and back
 t_f = 2*R_max/c     # time to reach to max range and back
-R_t0 = 5e3       # target range; unit = m
-target_v = 30            # target velocity; unit = m/s; 30m/s=108km/h=67mph
-G = 100    # Antenna Gain = 20dB
-F_0 = 10e9   # Carrier frequency; unit = Hz
-w_len = c/F_0   # wave length; unit = m
-RCS = 10        # radar cross section
-pha_rand = np.random.normal(0, 1, 1)*2*pi      # random.normal(mean, std, size); constant random phase factor
-RN_mean = 0
-RN_std = 10e-9 * 0.1    # noise power
+R_t0 = 8e3          # target range; unit = m
+target_v = 30       # target velocity; unit = m/s; 30m/s=108km/h=67mph
 
-x_t, t = LFM(BW, F_s, T_p, plot=False)    # un-windowed TX waveform
+# TX power
+TX_amp = np.sqrt(1000/2)        # 1000W transmitter
+G = 1000                        # Antenna Gain = 30dB
+F_0 = 10e9                      # Carrier frequency; unit = Hz
+wave_len = c/F_0                # wave length; unit = m
+RCS = 10                        # radar cross section
+pha_rand = np.random.normal(0, 1, 1)*2*pi      # random.normal(mean, std, size); constant random phase factor
+
+# RX Noise
+k_B = 1.38e-23              # Boltzmann constant; J/K
+Temp_room = 290             # room temperature in K
+NF = 4                      # 6dB receive noise figure
+NP = k_B*Temp_room*F_s*NF   # noise power
+RN_mean = 0                 # white noise mean
+RN_std = np.sqrt(NP/2)      # noise power
+
+
+# construct TX Waveform and mapping ADC sampling time to physical distance
+x_t, t = LFM(BW, F_s, T_p, plot=False)      # un-windowed TX waveform
 x_t_w = x_t * sig.windows.hann(t.size)       # windowed TX waveform
 
 t_tol = T_p + t_f + T_p         # time(pulse completely out of TX) + time travel + time(pulse completely back to RX)
@@ -45,20 +58,18 @@ x_t_abs[0:t.size] = x_t_abs[0:t.size] + x_t_w   # add windowed waveform to the s
 for m in range(0, pulse_num):
     R_t = R_t0 - m*target_v*T_PRI   # target location at each pulse
     tau = 2 * R_t / c  # propagation time delay; unit = s
-    # print(tau)
-    alpha = np.sqrt((G**2 * w_len**2 * RCS) / ((4*pi)**3 * R_t**4))     # Radar equation
+    F_D = 2*target_v/wave_len
+    alpha = np.sqrt((G**2 * wave_len**2 * RCS) / ((4*pi)**3 * R_t**4))     # Radar equation
     # time delayed signal or received waveform and convert into two dimension array
-    x_t_rx_temp = alpha * np.exp(1j*pha_rand) * prop_delay(x_t_abs, t_abs, tau, t_i, F_s)
+    x_t_rx_temp = np.exp(1j*pha_rand) * propagation(x_t_abs, t_abs, tau, t_i, F_s, alpha, F_D, F_0, TX_amp)
     RN_I = np.random.normal(RN_mean, RN_std, x_t_rx_temp.size)  # adding white noise; scaled down based on the RX power; affects I
     RN_Q = np.random.normal(RN_mean, RN_std, x_t_rx_temp.size) * 1j  # adding white noise; scaled down based on the RX power; affects I
-    x_t_rx_temp = x_t_rx_temp + RN_I + RN_Q  # adding noise
-    x_t_rx_temp = np.array([x_t_rx_temp])
+    x_t_rx_temp = x_t_rx_temp + RN_I + RN_Q     # adding noise
+    x_t_rx_temp = np.array([x_t_rx_temp])       # create 2-D array
     if m == 0:
         x_t_rx = x_t_rx_temp
     else:
-        x_t_rx = np.concatenate((x_t_rx, x_t_rx_temp))
-
-
+        x_t_rx = np.concatenate((x_t_rx, x_t_rx_temp))      # add each echo to the matrix
 
 # match filter for each range bin
 for i in range(0, pulse_num):
@@ -68,14 +79,36 @@ for i in range(0, pulse_num):
     else:
         RangeBin = np.concatenate((RangeBin, MFO))
 
+# Doppler processing
+for i in range(0, RangeBin[0].size):
+    Doppler_temp = np.array([fftshift(fft(RangeBin[:, i]))])
+    if i == 0:
+        Doppler = Doppler_temp
+    else:
+        Doppler = np.concatenate((Doppler, Doppler_temp))
+
+Doppler = Doppler.transpose()
+DopplerFreq = fftshift(fftfreq(pulse_num, T_PRI))
+DopplerVel = DopplerFreq * wave_len/2
+
 # Plot 2D array
-# RangeBin = np.transpose(RangeBin)   # flip the x, y axis for plotting only;;;; not goooooood
 fig, ax = plt.subplots(1, 1)
 plt.imshow(np.abs(RangeBin), cmap=cm.jet, extent=[0, t_abs.max()*c/2, 0, RangeBin.shape[0]])     # plot 2-D array and correct range scale
-# plt.imshow(np.abs(RangeBin.transpose()), extent=[0, RangeBin.shape[1], 0, t_abs.max()*c/2])     # plot 2-D array and correct range scale
-ax.set_title('Pulse Doppler')
+ax.set_title('Range vs Doppler')
+ax.set_xlabel("Range (m)")
+ax.set_ylabel("Pulse Number")
 ax.set_aspect('auto')
 ax.xaxis.set_major_formatter(mtick.FormatStrFormatter('%.1e'))
+plt.colorbar(orientation='vertical')
+
+fig, ax = plt.subplots(1, 1)
+plt.imshow(np.abs(Doppler), cmap=cm.jet, extent=[0, t_abs.max()*c/2, DopplerVel.max(), DopplerVel.min()])
+ax.set_title('Range vs Velocity')
+ax.set_xlabel("Range (m)")
+ax.set_ylabel("Velocity (m/s)")
+ax.set_aspect('auto')
+ax.xaxis.set_major_formatter(mtick.FormatStrFormatter('%.1e'))
+ax.yaxis.set_major_formatter(mtick.FormatStrFormatter('%.1e'))
 plt.colorbar(orientation='vertical')
 
 # Plot 1 slice of the 2D array for testing
@@ -89,14 +122,14 @@ ax[0].set_title("TX waveform")
 
 ax[1].plot(R_abs, x_t_rx[0].real, color='r')
 ax[1].plot(R_abs, x_t_rx[0].imag, color='b')
-ax[1].set_xlabel("Time (s)")
+ax[1].set_xlabel("Range (m)")
 ax[1].set_ylabel("Amp")
 ax[1].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 ax[1].yaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 ax[1].set_title("delayed waveform")
 
 ax[2].plot(R_abs, np.abs(RangeBin[0]))
-ax[2].set_xlabel("Time (s)")
+ax[2].set_xlabel("Range (m)")
 ax[2].set_ylabel("Amp")
 ax[2].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 ax[2].yaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))

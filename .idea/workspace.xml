@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1897024-dfd7-4ee4-bd7e-6128512d9450" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/HW2/HW2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HW2/HW2_test1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/HW2/HW2_test2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HW1/HW1.py" beforeDir="false" afterPath="$PROJECT_DIR$/HW1/HW1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HW1/Waveform_Gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waveform_Gen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HW1/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/HW1/HW1_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HW2/HW2.py" beforeDir="false" afterPath="$PROJECT_DIR$/HW2/HW2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HW2/HW2_test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/HW2/HW2_test1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waveform_Gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waveform_Gen.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,22 +15,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HW1/HW1.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="29" selection-start-line="29" selection-end-line="29" selection-end-column="31" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Waveform_Gen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1445">
-              <caret line="88" column="47" selection-start-line="88" selection-start-column="47" selection-end-line="88" selection-end-column="47" />
+            <state relative-caret-position="306">
+              <caret line="102" column="26" selection-start-line="102" selection-start-column="26" selection-end-line="102" selection-end-column="26" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -45,8 +29,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HW2/HW2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="207">
-              <caret line="18" column="21" lean-forward="true" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+            <state relative-caret-position="255">
+              <caret line="15" column="41" lean-forward="true" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -57,8 +41,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/HW2/HW2_test1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+            <state relative-caret-position="119">
+              <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -91,12 +75,16 @@
       <find>+=sub_plt_i</find>
       <find>ax3</find>
       <find>T_p</find>
+      <find>w_len</find>
+      <find>DopplerFreq</find>
     </findStrings>
     <replaceStrings>
       <replace>F_s</replace>
       <replace>BW</replace>
       <replace>sub_plt_i += 1</replace>
       <replace>ax[2]</replace>
+      <replace>wave_len</replace>
+      <replace>Doppler</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -107,18 +95,18 @@
       <list>
         <option value="$PROJECT_DIR$/HW1/test.py" />
         <option value="$PROJECT_DIR$/HW1/Waveform_Gen.py" />
-        <option value="$PROJECT_DIR$/Waveform_Gen.py" />
-        <option value="$PROJECT_DIR$/HW2/HW2_test1.py" />
         <option value="$PROJECT_DIR$/HW2/HW2_test2.py" />
+        <option value="$PROJECT_DIR$/HW2/HW2_test1.py" />
         <option value="$PROJECT_DIR$/HW1/HW1.py" />
+        <option value="$PROJECT_DIR$/Waveform_Gen.py" />
         <option value="$PROJECT_DIR$/HW2/HW2.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="951" />
-    <option name="width" value="978" />
-    <option name="height" value="1039" />
+    <option name="x" value="952" />
+    <option name="width" value="977" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -280,8 +268,8 @@
       <list>
         <item itemvalue="Python.HW2" />
         <item itemvalue="Python.HW1" />
-        <item itemvalue="Python.HW2_test2" />
         <item itemvalue="Python.HW2_test1" />
+        <item itemvalue="Python.HW2_test2" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -303,19 +291,19 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17173052" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09709379" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4980185" visible="true" weight="0.32673267" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.81770146" weight="0.4893918" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.678996" visible="true" weight="0.32673267" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.81439894" weight="0.48656294" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32956153" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32904148" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5019815" side_tool="true" visible="true" weight="0.32673267" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.32100397" side_tool="true" visible="true" weight="0.32673267" />
       <window_info anchor="bottom" id="Python Console" order="10" weight="0.32531825" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -337,27 +325,24 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/HW2/HW2_test1.py</url>
-          <line>10</line>
+          <line>11</line>
           <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/HW2/HW2.py</url>
-          <line>73</line>
-          <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/HW1/HW1.py</url>
           <line>44</line>
           <option name="timeStamp" value="35" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/HW2/HW2.py</url>
+          <line>94</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
         <watch expression="x_t" />
-        <watch expression="x_t_rx_temp.shape" language="Python" />
-        <watch expression="x_t_rx_temp" />
-        <watch expression="x_t_rx_temp" />
       </configuration>
     </watches-manager>
   </component>
@@ -406,16 +391,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Waveform_Gen.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="88" column="47" selection-start-line="88" selection-start-column="47" selection-end-line="88" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/HW2/HW2_test2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -426,10 +401,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/numpy/fft/helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/HW1/HW1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="29" selection-start-line="29" selection-end-line="29" selection-end-column="31" />
+        <state relative-caret-position="394">
+          <caret line="38" column="32" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -438,15 +420,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/HW2/HW2_test1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="14" selection-start-line="10" selection-start-column="14" selection-end-line="10" selection-end-column="14" />
+        <state relative-caret-position="119">
+          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Waveform_Gen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="102" column="26" selection-start-line="102" selection-start-column="26" selection-end-line="102" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/HW2/HW2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="18" column="21" lean-forward="true" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+        <state relative-caret-position="255">
+          <caret line="15" column="41" lean-forward="true" selection-start-line="15" selection-start-column="41" selection-end-line="15" selection-end-column="41" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
