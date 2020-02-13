@@ -9,13 +9,12 @@ from Waveform_Gen import prop_delay, LFM, matched_filter, zero_pad, propagation
 
 
 # ------------------ Processor parameters ------------------------------------------------------------------------------
-F_D = 0             # doppler shift
 T_p = 5e-6          # pulse width
 BW = 50e6           # LFM bandwidth
 F_s = 2*BW          # ADC sampling frequency
 T_s = 1/F_s         # ADC sampling period
 T_PRI = 100e-6      # Pulse repetition interval; max unambigous velocity = wave_len/4/T_PRI = 750m/s
-pulse_num = 100     # number of pulses
+pulse_num = 1000     # number of pulses
 
 # -------------------- Physical parameters -----------------------------------------------------------------------------
 # Range and velocity
@@ -23,7 +22,7 @@ R_min = 0           # minimum range of interest
 R_max = 15e3        # maximum range of interest; max unambigous range = speed of light * T_PRI/2 = 1.5km
 t_i = 2*R_min/c     # time to reach to minimum range and back
 t_f = 2*R_max/c     # time to reach to max range and back
-R_t0 = 8e3          # target range; unit = m
+R_t0 = 5e3          # target range; unit = m
 target_v = 30       # target velocity; unit = m/s; 30m/s=108km/h=67mph
 
 # TX power
@@ -58,7 +57,7 @@ x_t_abs[0:t.size] = x_t_abs[0:t.size] + x_t_w   # add windowed waveform to the s
 for m in range(0, pulse_num):
     R_t = R_t0 - m*target_v*T_PRI   # target location at each pulse
     tau = 2 * R_t / c  # propagation time delay; unit = s
-    F_D = 2*target_v/wave_len
+    F_D = 2*target_v/wave_len   # doppler shift
     alpha = np.sqrt((G**2 * wave_len**2 * RCS) / ((4*pi)**3 * R_t**4))     # Radar equation
     # time delayed signal or received waveform and convert into two dimension array
     x_t_rx_temp = np.exp(1j*pha_rand) * propagation(x_t_abs, t_abs, tau, t_i, F_s, alpha, F_D, F_0, TX_amp)

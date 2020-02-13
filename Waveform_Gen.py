@@ -89,7 +89,7 @@ def propagation(x_t, t, tau, t_i, F_s, att=1, F_D=0, F_0=0, TX_amp=1):
     # FFT
     x_f = np.fft.fft(x_t)  # frequency content of signal x
     x_f = np.fft.fftshift(x_f)  # re-align frequency content
-    freq = np.fft.fftfreq(t.shape[-1], 1/F_s)  # set up frequency axis
+    freq = np.fft.fftfreq(t.size, 1/F_s)  # set up frequency axis
     freq = np.fft.fftshift(freq)  # re-align frequency axis
 
     # frequency phase shift or propagation time delay
@@ -101,7 +101,6 @@ def propagation(x_t, t, tau, t_i, F_s, att=1, F_D=0, F_0=0, TX_amp=1):
 
     # Doppler frequency shift + 2-way free space loss
     x_t_s = x_t_s * TX_amp * att * np.exp(1j*2*pi*F_D*t) * np.exp(-1j*2*pi*(F_0+F_D)*tau)
-
     return x_t_s
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -127,6 +126,13 @@ def prop_delay(x_t, t, tau, t_i, F_s, att=1, F_D=0, F_0=0):
 
     # Doppler frequency shift
     x_t_s = x_t_s * att * np.exp(1j * 2 * pi * F_D * t)
+
+    return x_t_s
+
+def phase_delay(x_t, t, tau, t_i, F_s, att=1, F_D=0, F_0=0):
+
+    # Doppler frequency shift
+    x_t_s = x_t * att * np.exp(1j * 2 * pi * F_D * t) * np.exp(1j*2*pi*F_0*tau)
 
     return x_t_s
 # ----------------------------------------------------------------------------------------------------------------------
