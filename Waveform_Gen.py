@@ -1,19 +1,23 @@
 import numpy as np
+from numpy.fft import fft, fftshift, fftfreq, ifft, ifftshift
 from scipy.constants import c, pi
 import matplotlib.pyplot as plt
 from matplotlib import ticker as mtick
+
 
 # ----------------------------------------------------------------------------------------------------------------------
 def matched_filter(x_t_tx, x_t_rx, TD = True):
     h_t = np.conjugate(np.flip(x_t_tx))  # matched filter
     if TD:  # use convolution in time domain
         FMFO = np.convolve(x_t_rx, h_t, 'full')  # full matched filter output; length = size(h_t) + size(x_t_rx) - 1
-        MFO = FMFO[(x_t_tx.size-1):FMFO.size]   # remove the delay caused by the matched filter
-    # else:   # use multiplication in frequency domain
-    #     x_f_tx = np.fft.fft(x_t_tx)     # frequency content of signal x
-    #     x_f_tx = np.fft.fftshift(x_f_tx)    # re-align frequency content
-    #     x_f_rx = np.fft.fft(x_t_rx)
-    #     x_f_rx = np.fft.fftshift(x_f_rx)  # re-align frequency content
+    else:   # use multiplication in frequency domain
+        PO2 = int(np.ceil(np.log2(x_t_rx.size)))    # zero pad up to the next power of 2
+        x_f_rx = fftshift(fft(x_t_rx, 2**PO2))     # frequency content of signal x, then re-align frequency content by shift
+        x_f_h = fftshift(fft(h_t, 2**PO2))     # FFT of h_t, need to match the size to x_t_rx
+        FMFO = ifft(ifftshift(x_f_rx*x_f_h))
+
+    # MFO = FMFO[(x_t_tx.size - 1):FMFO.size]  # remove the delay caused by the matched filter
+    MFO = FMFO[(x_t_tx.size - 1):(x_t_rx.size + x_t_tx.size - 1)]  # remove the delay caused by the matched filter
     return MFO
 # ----------------------------------------------------------------------------------------------------------------------
 
@@ -32,10 +36,10 @@ def LFM(BW, F_s, T_p, plot = False):
     # freq = -BW / 2 + chp_rt * t       # for testing only
     # x_t = np.cos(phase)  # un-windowed signal
     x_t = np.exp(1j*phase)  # un-windowed signal
-    # x_f = np.fft.fft(x_t)  # frequency content of signal x
-    # x_f = np.fft.fftshift(x_f)  # re-align frequency content
-    # freq = np.fft.fftfreq(t.shape[-1], 1 / F_s)  # set up frequency axis
-    # freq = np.fft.fftshift(freq)  # re-align frequency axis
+    # x_f = fft(x_t)  # frequency content of signal x
+    # x_f = fftshift(x_f)  # re-align frequency content
+    # freq = fftfreq(t.shape[-1], 1 / F_s)  # set up frequency axis
+    # freq = fftshift(freq)  # re-align frequency axis
 
     if plot:
         fig = plt.figure()
@@ -80,6 +84,7 @@ def LFM(BW, F_s, T_p, plot = False):
     return x_t, t
 # ----------------------------------------------------------------------------------------------------------------------
 
+
 # ----------------------------------------------------------------------------------------------------------------------
 #   x_t = sampled waveform, t = time sample
 #   tau = propagation delay, t_i = initial sample
@@ -87,17 +92,17 @@ def LFM(BW, F_s, T_p, plot = False):
 #   att = attenuation, F_D = doppler frequency shift
 def propagation(x_t, t, tau, t_i, F_s, att=1, F_D=0, F_0=0, TX_amp=1):
     # FFT
-    x_f = np.fft.fft(x_t)  # frequency content of signal x
-    x_f = np.fft.fftshift(x_f)  # re-align frequency content
-    freq = np.fft.fftfreq(t.size, 1/F_s)  # set up frequency axis
-    freq = np.fft.fftshift(freq)  # re-align frequency axis
+    PO2 = int(np.ceil(np.log2(x_t.size)))
+    x_f = fftshift(fft(x_t, 2**PO2))  # frequency content of signal x and re-align frequency content
+    # x_f = fftshift(fft(x_t))  # frequency content of signal x and re-align frequency content
+    freq = fftshift(fftfreq(x_f.size, 1/F_s))  # set up frequency axis and re-align frequency axis
 
     # frequency phase shift or propagation time delay
     x_f_s = x_f * np.exp(-1j * 2 * pi * freq * (tau - t_i))
 
     # inverse FFT
-    x_f_s = np.fft.ifftshift(x_f_s)  # inverse FFTshift
-    x_t_s = np.fft.ifft(x_f_s)  # inverse FFT
+    x_t_s_temp = ifft(ifftshift(x_f_s))  # inverse FFT shift and inverse FFT
+    x_t_s = x_t_s_temp[0:x_t.size]
 
     # Doppler frequency shift + 2-way free space loss
     x_t_s = x_t_s * TX_amp * att * np.exp(1j*2*pi*F_D*t) * np.exp(-1j*2*pi*(F_0+F_D)*tau)
@@ -112,25 +117,25 @@ def propagation(x_t, t, tau, t_i, F_s, att=1, F_D=0, F_0=0, TX_amp=1):
 #   att = attenuation, F_D = doppler frequency shift
 def prop_delay(x_t, t, tau, t_i, F_s, att=1, F_D=0, F_0=0):
     # FFT
-    x_f = np.fft.fft(x_t)  # frequency content of signal x
-    x_f = np.fft.fftshift(x_f)  # re-align frequency content
-    freq = np.fft.fftfreq(t.shape[-1], 1/F_s)  # set up frequency axis
-    freq = np.fft.fftshift(freq)  # re-align frequency axis
+    x_f = fft(x_t)  # frequency content of signal x
+    x_f = fftshift(x_f)  # re-align frequency content
+    freq = fftfreq(t.shape[-1], 1/F_s)  # set up frequency axis
+    freq = fftshift(freq)  # re-align frequency axis
 
     # frequency phase shift or propagation time delay
     x_f_s = x_f * np.exp(-1j * 2 * pi * freq * (tau - t_i))
 
     # inverse FFT
-    x_f_s = np.fft.ifftshift(x_f_s)  # inverse FFTshift
-    x_t_s = np.fft.ifft(x_f_s)  # inverse FFT
+    x_f_s = ifftshift(x_f_s)  # inverse FFTshift
+    x_t_s = ifft(x_f_s)  # inverse FFT
 
     # Doppler frequency shift
     x_t_s = x_t_s * att * np.exp(1j * 2 * pi * F_D * t)
 
     return x_t_s
 
-def phase_delay(x_t, t, tau, t_i, F_s, att=1, F_D=0, F_0=0):
 
+def phase_delay(x_t, t, tau, t_i, F_s, att=1, F_D=0, F_0=0):
     # Doppler frequency shift
     x_t_s = x_t * att * np.exp(1j * 2 * pi * F_D * t) * np.exp(1j*2*pi*F_0*tau)
 

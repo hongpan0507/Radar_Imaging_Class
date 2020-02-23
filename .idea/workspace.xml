@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1897024-dfd7-4ee4-bd7e-6128512d9450" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/HW1/HW1_test2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/HW2/HW2_test3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HW1/HW1_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/HW1/HW1_test1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HW2/HW2.py" beforeDir="false" afterPath="$PROJECT_DIR$/HW2/HW2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HW2/Range Migration vs Resolution.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/HW2/Range Migration vs Resolution.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Waveform_Gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waveform_Gen.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,10 +20,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Waveform_Gen.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2278">
-              <caret line="134" column="78" selection-start-line="134" selection-start-column="78" selection-end-line="134" selection-end-column="78" />
+            <state relative-caret-position="142">
+              <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#2316#3709#0" />
               </folding>
             </state>
           </provider>
@@ -31,8 +33,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/HW2/HW2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="386">
-              <caret line="27" column="8" lean-forward="true" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+            <state relative-caret-position="306">
+              <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -58,6 +60,9 @@
       <find>T_p</find>
       <find>w_len</find>
       <find>DopplerFreq</find>
+      <find>matched_filter</find>
+      <find>np.fft.fftfreq</find>
+      <find>str(time.perf_counter()) + &quot;:</find>
     </findStrings>
     <replaceStrings>
       <replace>F_s</replace>
@@ -66,6 +71,8 @@
       <replace>ax[2]</replace>
       <replace>wave_len</replace>
       <replace>Doppler</replace>
+      <replace>fftfreq</replace>
+      <replace>&quot;</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -79,16 +86,19 @@
         <option value="$PROJECT_DIR$/HW2/HW2_test2.py" />
         <option value="$PROJECT_DIR$/HW2/HW2_test1.py" />
         <option value="$PROJECT_DIR$/HW1/HW1.py" />
-        <option value="$PROJECT_DIR$/Waveform_Gen.py" />
         <option value="$PROJECT_DIR$/HW1/HW1_test2.py" />
+        <option value="$PROJECT_DIR$/timer.py" />
+        <option value="$PROJECT_DIR$/HW2/HW2_test3.py" />
+        <option value="$PROJECT_DIR$/Waveform_Gen.py" />
         <option value="$PROJECT_DIR$/HW2/HW2.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="952" />
-    <option name="width" value="978" />
-    <option name="height" value="1039" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-9" />
+    <option name="y" value="-9" />
+    <option name="width" value="977" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -102,11 +112,6 @@
             <path>
               <item name="Radar_Imaging_Class" type="b2602c69:ProjectViewProjectNode" />
               <item name="Radar_Imaging_Class" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Radar_Imaging_Class" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Radar_Imaging_Class" type="462c0819:PsiDirectoryNode" />
-              <item name="HW1" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Radar_Imaging_Class" type="b2602c69:ProjectViewProjectNode" />
@@ -204,7 +209,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="HW2_test1" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="HW2_test3" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Radar_Imaging_Class" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -216,7 +221,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HW2/HW2_test1.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HW2/HW2_test3.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -249,10 +254,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.HW2" />
+        <item itemvalue="Python.Waveform_Gen" />
+        <item itemvalue="Python.HW2_test3" />
         <item itemvalue="Python.HW1_test2" />
         <item itemvalue="Python.HW1" />
-        <item itemvalue="Python.Waveform_Gen" />
-        <item itemvalue="Python.HW2_test1" />
       </list>
     </recent_temporary>
   </component>
@@ -270,23 +275,23 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-6" y="0" width="781" height="830" extended-state="0" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19731544" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16908851" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.67785233" visible="true" weight="0.3304721" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.81439894" weight="0.48656294" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.664465" visible="true" weight="0.31400284" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.80713344" weight="0.41867045" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32956153" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32904148" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.32214764" side_tool="true" visible="true" weight="0.3304721" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32531825" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.497358" weight="0.3281471" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.33553502" side_tool="true" visible="true" weight="0.31400284" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.82364595" weight="0.31966054" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -317,8 +322,23 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/HW2/HW2.py</url>
-          <line>93</line>
+          <line>97</line>
           <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/HW2/HW2_test3.py</url>
+          <line>89</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Waveform_Gen.py</url>
+          <line>20</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Waveform_Gen.py</url>
+          <line>100</line>
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -417,20 +437,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Waveform_Gen.py">
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2278">
-          <caret line="134" column="78" selection-start-line="134" selection-start-column="78" selection-end-line="134" selection-end-column="78" />
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HW2/HW2_test3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="146" column="38" lean-forward="true" selection-start-line="146" selection-start-column="38" selection-end-line="146" selection-end-column="38" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/timer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="17" lean-forward="true" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Waveform_Gen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#2316#3709#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/HW2/HW2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="386">
-          <caret line="27" column="8" lean-forward="true" selection-start-line="27" selection-start-column="8" selection-end-line="27" selection-end-column="8" />
+        <state relative-caret-position="306">
+          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
