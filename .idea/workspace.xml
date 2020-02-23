@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a1897024-dfd7-4ee4-bd7e-6128512d9450" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/HW2/HW2_test3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/timer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HW1/HW1.py" beforeDir="false" afterPath="$PROJECT_DIR$/HW1/HW1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HW1/Waveform_Gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/HW1/Waveform_Gen.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/HW1/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/HW1/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HW2/HW2.py" beforeDir="false" afterPath="$PROJECT_DIR$/HW2/HW2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HW2/Range Migration vs Resolution.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/HW2/Range Migration vs Resolution.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waveform_Gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waveform_Gen.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,36 +17,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Waveform_Gen.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="142">
+              <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#2316#3709#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/HW1/HW1.py">
+        <entry file="file://$PROJECT_DIR$/HW2/HW2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="66" column="23" lean-forward="true" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HW1/Waveform_Gen.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4">
-              <caret line="23" column="36" lean-forward="true" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#923#1576#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HW1/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="173">
-              <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+            <state relative-caret-position="306">
+              <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -68,12 +58,21 @@
       <find>+=sub_plt_i</find>
       <find>ax3</find>
       <find>T_p</find>
+      <find>w_len</find>
+      <find>DopplerFreq</find>
+      <find>matched_filter</find>
+      <find>np.fft.fftfreq</find>
+      <find>str(time.perf_counter()) + &quot;:</find>
     </findStrings>
     <replaceStrings>
       <replace>F_s</replace>
       <replace>BW</replace>
       <replace>sub_plt_i += 1</replace>
       <replace>ax[2]</replace>
+      <replace>wave_len</replace>
+      <replace>Doppler</replace>
+      <replace>fftfreq</replace>
+      <replace>&quot;</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -84,7 +83,14 @@
       <list>
         <option value="$PROJECT_DIR$/HW1/test.py" />
         <option value="$PROJECT_DIR$/HW1/Waveform_Gen.py" />
+        <option value="$PROJECT_DIR$/HW2/HW2_test2.py" />
+        <option value="$PROJECT_DIR$/HW2/HW2_test1.py" />
         <option value="$PROJECT_DIR$/HW1/HW1.py" />
+        <option value="$PROJECT_DIR$/HW1/HW1_test2.py" />
+        <option value="$PROJECT_DIR$/timer.py" />
+        <option value="$PROJECT_DIR$/HW2/HW2_test3.py" />
+        <option value="$PROJECT_DIR$/Waveform_Gen.py" />
+        <option value="$PROJECT_DIR$/HW2/HW2.py" />
       </list>
     </option>
   </component>
@@ -110,7 +116,7 @@
             <path>
               <item name="Radar_Imaging_Class" type="b2602c69:ProjectViewProjectNode" />
               <item name="Radar_Imaging_Class" type="462c0819:PsiDirectoryNode" />
-              <item name="HW1" type="462c0819:PsiDirectoryNode" />
+              <item name="HW2" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -121,6 +127,11 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Github\Radar_Imaging_Class" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -134,7 +145,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.HW1">
+  <component name="RunManager" selected="Python.HW2">
     <configuration name="HW1" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Radar_Imaging_Class" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -156,7 +167,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Waveform_Gen" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="HW1_test2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Radar_Imaging_Class" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -168,7 +179,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HW1/Waveform_Gen.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HW1/HW1_test2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -177,7 +188,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="HW2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Radar_Imaging_Class" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -185,11 +196,53 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/HW1" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/HW2" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HW1/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HW2/HW2.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="HW2_test3" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Radar_Imaging_Class" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/HW2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/HW2/HW2_test3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Waveform_Gen" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Radar_Imaging_Class" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Waveform_Gen.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -200,9 +253,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.HW1" />
-        <item itemvalue="Python.test" />
+        <item itemvalue="Python.HW2" />
         <item itemvalue="Python.Waveform_Gen" />
+        <item itemvalue="Python.HW2_test3" />
+        <item itemvalue="Python.HW1_test2" />
+        <item itemvalue="Python.HW1" />
       </list>
     </recent_temporary>
   </component>
@@ -223,20 +278,20 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17173052" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16908851" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32673267" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.46110326" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.664465" visible="true" weight="0.31400284" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.80713344" weight="0.41867045" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" weight="0.32956153" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32904148" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" weight="0.32618025" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.497358" weight="0.3281471" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.33553502" side_tool="true" visible="true" weight="0.31400284" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.82364595" weight="0.31966054" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -247,13 +302,43 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/HW1/HW1.py</url>
-          <line>64</line>
+          <line>66</line>
           <option name="timeStamp" value="21" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/HW1/test.py</url>
+          <url>file://$PROJECT_DIR$/HW1/HW1_test1.py</url>
           <line>39</line>
           <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/HW2/HW2_test1.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/HW1/HW1.py</url>
+          <line>44</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/HW2/HW2.py</url>
+          <line>97</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/HW2/HW2_test3.py</url>
+          <line>89</line>
+          <option name="timeStamp" value="39" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Waveform_Gen.py</url>
+          <line>20</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Waveform_Gen.py</url>
+          <line>100</line>
+          <option name="timeStamp" value="47" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -263,6 +348,15 @@
       </configuration>
     </watches-manager>
   </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="watch">
+      <expression>
+        <expression-string>x_t_rx_temp.shape</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/numpy/core/numeric.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -271,31 +365,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Dropbox (Univ. of Oklahoma)/plotting.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://D:/Dropbox (Univ. of Oklahoma)/plotting.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Temp/kite_tutorial.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="51" column="56" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="56" />
           <folding>
             <element signature="e#3352#3367#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HW1/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="173">
-          <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -307,21 +383,99 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HW1/Waveform_Gen.py">
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/numpy/fft/helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4">
-          <caret line="23" column="36" lean-forward="true" selection-start-line="23" selection-start-column="36" selection-end-line="23" selection-end-column="36" />
+        <state relative-caret-position="101">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HW1/HW1_test1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="10" column="11" selection-start-line="10" selection-start-column="11" selection-end-line="10" selection-end-column="11" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#923#1576#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HW2/HW2_test1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="9" lean-forward="true" selection-start-line="7" selection-start-column="9" selection-end-line="7" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HW2/HW2_test2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HW1/HW1_test2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="7" column="46" lean-forward="true" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/HW1/HW1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="66" column="23" lean-forward="true" selection-start-line="66" selection-start-column="23" selection-end-line="66" selection-end-column="23" />
+        <state relative-caret-position="323">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HW2/HW2_test3.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="146" column="38" lean-forward="true" selection-start-line="146" selection-start-column="38" selection-end-line="146" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/timer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="17" lean-forward="true" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Waveform_Gen.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="97" column="13" selection-start-line="97" selection-start-column="13" selection-end-line="97" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#2316#3709#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HW2/HW2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="25" column="12" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="12" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
