@@ -10,11 +10,12 @@ import timer
 
 # ------------------ Processor parameters ------------------------------------------------------------------------------
 T_p = 10e-6          # pulse width
-BW = 10e6           # LFM bandwidth
+BW = 50e6           # LFM bandwidth
 F_s = 2*BW          # ADC sampling frequency
 T_s = 1/F_s         # ADC sampling period
 T_PRI = 100e-6      # Pulse repetition interval; max unambigous velocity = wave_len/4/T_PRI = 75m/s
-pulse_num = 1024     # number of pulses
+pulse_num = 4096     # number of pulses
+# pulse_num = 256     # number of pulses
 
 # -------------------- Physical parameters -----------------------------------------------------------------------------
 # Range and velocity
@@ -28,7 +29,7 @@ target_v = 60       # target velocity; unit = m/s; 30m/s=108km/h=67mph
 # TX power
 TX_amp = np.sqrt(1000/2)        # 1000W transmitter
 G = 1000                        # Antenna Gain = 30dB
-F_0 = 1e9                      # Carrier frequency; unit = Hz
+F_0 = 10e9                      # Carrier frequency; unit = Hz
 wave_len = c/F_0                # wave length; unit = m
 RCS = 10                        # radar cross section
 pha_rand = np.random.normal(0, 1, 1)*2*pi      # random.normal(mean, std, size); constant random phase factor
@@ -81,20 +82,6 @@ print("match filter")
 RangeBin = np.zeros(x_t_rx.shape, dtype=complex)    # pre-allocate memory to speed up calculation
 for i in range(0, pulse_num):
     RangeBin[i, :] = matched_filter(x_t_w, x_t_rx[i, :], True)  # true = convolution; false = frequency domain
-
-# # FFT over fast time for received signal with match filter applied
-# FT_FFT_RangeBin = fftshift(fftn(RangeBin, axes=(1,)), axes=(1,))
-# FT_FFT_freq_RangeBin = fftshift(fftfreq(FT_FFT_RangeBin.shape[1], T_s))      # Fast time frequency axis
-#
-# fig, ax = plt.subplots(1, 1)
-# plt.imshow(np.abs(FT_FFT_RangeBin), cmap=cm.jet, extent=[0, t_abs.max()*c/2, 0, FT_FFT_freq_RangeBin.shape[0]])     # plot 2-D array and correct range scale
-# ax.set_title('FT_FFT_freq_RangeBin vs FT_FFT_RangeBin, Before Correction')
-# ax.set_xlabel("FT_FFT_freq")
-# ax.set_ylabel("Pulse Number")
-# ax.set_aspect('auto')
-# ax.xaxis.set_major_formatter(mtick.FormatStrFormatter('%.1e'))
-# plt.colorbar(orientation='vertical')
-# plt.show()
 
 time.count()
 print("Doppler Processing")

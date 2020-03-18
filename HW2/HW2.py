@@ -13,16 +13,16 @@ T_p = 10e-6          # pulse width
 BW = 50e6           # LFM bandwidth
 F_s = 2*BW          # ADC sampling frequency
 T_s = 1/F_s         # ADC sampling period
-T_PRI = 100e-6      # Pulse repetition interval; max unambigous velocity = wave_len/4/T_PRI = 750m/s
+T_PRI = 100e-6      # Pulse repetition interval; max unambigous velocity = wave_len/4/T_PRI = 75m/s
 pulse_num = 256     # number of pulses
 
 # -------------------- Physical parameters -----------------------------------------------------------------------------
 # Range and velocity
 R_min = 0           # minimum range of interest
-R_max = 5e3        # maximum range of interest; max unambigous range = speed of light * T_PRI/2 = 1.5km
+R_max = 15e3        # maximum range of interest; max unambigous range = speed of light * T_PRI/2 = 15km
 t_i = 2*R_min/c     # time to reach to minimum range and back
 t_f = 2*R_max/c     # time to reach to max range and back
-R_t0 = 1e3          # target range; unit = m
+R_t0 = 10e3          # target range; unit = m
 target_v = 30       # target velocity; unit = m/s; 30m/s=108km/h=67mph
 
 # TX power

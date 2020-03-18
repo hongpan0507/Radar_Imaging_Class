@@ -1,5 +1,5 @@
 import numpy as np
-from numpy.fft import fft, fftshift, fftfreq, fftn, ifftn
+from numpy.fft import fft, fftshift, fftfreq, fftn, ifftn, ifftshift
 from scipy.constants import c, pi
 from scipy import signal as sig
 from matplotlib import pyplot as plt
@@ -10,11 +10,12 @@ import timer
 
 # ------------------ Processor parameters ------------------------------------------------------------------------------
 T_p = 10e-6          # pulse width
-BW = 10e6           # LFM bandwidth
+BW = 50e6           # LFM bandwidth
 F_s = 2*BW          # ADC sampling frequency
 T_s = 1/F_s         # ADC sampling period
 T_PRI = 100e-6      # Pulse repetition interval; max unambigous velocity = wave_len/4/T_PRI = 75m/s
-pulse_num = 1024     # number of pulses
+pulse_num = 4096     # number of pulses
+# pulse_num = 256     # number of pulses
 
 # -------------------- Physical parameters -----------------------------------------------------------------------------
 # Range and velocity
@@ -28,7 +29,7 @@ target_v = 60       # target velocity; unit = m/s; 30m/s=108km/h=67mph
 # TX power
 TX_amp = np.sqrt(1000/2)        # 1000W transmitter
 G = 1000                        # Antenna Gain = 30dB
-F_0 = 1e9                      # Carrier frequency; unit = Hz
+F_0 = 10e9                      # Carrier frequency; unit = Hz
 wave_len = c/F_0                # wave length; unit = m
 RCS = 10                        # radar cross section
 pha_rand = np.random.normal(0, 1, 1)*2*pi      # random.normal(mean, std, size); constant random phase factor
@@ -47,7 +48,8 @@ print("Create TX waveform")
 
 # construct TX Waveform and mapping ADC sampling time to physical distance
 x_t, t = LFM(BW, F_s, T_p, plot=False)      # un-windowed TX waveform
-x_t_w = x_t * sig.windows.hann(t.size)       # windowed TX waveform
+# x_t_w = x_t * sig.windows.hann(t.size)       # windowed TX waveform
+x_t_w = x_t * sig.windows.boxcar(t.size)
 
 t_tol = T_p + t_f + T_p         # time(pulse completely out of TX) + time travel + time(pulse completely back to RX)
 nSample = int(t_tol/T_s)        # ADC samples
@@ -82,26 +84,33 @@ RangeBin = np.zeros(x_t_rx.shape, dtype=complex)    # pre-allocate memory to spe
 for i in range(0, pulse_num):
     RangeBin[i, :] = matched_filter(x_t_w, x_t_rx[i, :], True)  # true = convolution; false = frequency domain
 
-# # FFT over fast time for received signal with match filter applied
-# FT_FFT_RangeBin = fftshift(fftn(RangeBin, axes=(1,)), axes=(1,))
-# FT_FFT_freq_RangeBin = fftshift(fftfreq(FT_FFT_RangeBin.shape[1], T_s))      # Fast time frequency axis
-#
-# fig, ax = plt.subplots(1, 1)
-# plt.imshow(np.abs(FT_FFT_RangeBin), cmap=cm.jet, extent=[0, t_abs.max()*c/2, 0, FT_FFT_freq_RangeBin.shape[0]])     # plot 2-D array and correct range scale
-# ax.set_title('FT_FFT_freq_RangeBin vs FT_FFT_RangeBin, Before Correction')
-# ax.set_xlabel("FT_FFT_freq")
-# ax.set_ylabel("Pulse Number")
-# ax.set_aspect('auto')
-# ax.xaxis.set_major_formatter(mtick.FormatStrFormatter('%.1e'))
-# plt.colorbar(orientation='vertical')
-# plt.show()
+time.count()
+print("FFT over Fast Time and interpolation")
+
+# FFT over time with interpolation in frequency domain by padding zeros in time domain
+padding = 4
+PO2 = int(np.ceil(np.log2(RangeBin[0, :].size)))
+# FFT over fast time for received signal with match filter applied
+FT_FFT_RangeBin = fftshift(fftn(RangeBin, s=(2**(PO2+padding),), axes=(1,)), axes=(1,))
+FT_FFT_freq_RangeBin = fftshift(fftfreq(RangeBin.shape[1], T_s))      # Fast time frequency axis
+
+time.count()
+print("Phase correction and back to time domain")
+
+# phase correction based on range frequency
+tau_0 = 2*R_t0/c
+for i, F in enumerate(FT_FFT_freq_RangeBin, start=0):     # extrac Freq to correct for phase misalignment
+    # isolate "exp(-1j*2*pi*F*tau_0)" term, correct for phase misalignment, then put "exp(-1j*2*pi*F*tau_0)" back
+    FT_FFT_RangeBin[:, i] = (FT_FFT_RangeBin[:, i]*np.exp(1j*2*pi*F*tau_0))**(F_0/(F_0+F)) * np.exp(-1j*2*pi*F*tau_0)
+
+# ifft back to time domain after phase correction and remove zero padding
+PhaseCorrected_RangeBin = ifftn(ifftshift(FT_FFT_RangeBin, axes=(1,)), s=(RangeBin[0, :].size,), axes=(1,))
 
 time.count()
 print("Doppler Processing")
 
 # Doppler processing to extract target speed
-Doppler = fftshift(fftn(RangeBin, axes=(0,)), axes=(0,))    # n dimensional FFT, only FFT over column (over pulses)
-# Doppler = Doppler.transpose()
+Doppler = fftshift(fftn(PhaseCorrected_RangeBin, axes=(0,)), axes=(0,))    # n dimensional FFT, only FFT over column (over pulses)
 DopplerFreq = fftshift(fftfreq(pulse_num, T_PRI))
 DopplerVelocity = DopplerFreq * wave_len/2
 
@@ -110,7 +119,7 @@ print("Start plotting")
 
 # Plot 2D array
 fig, ax = plt.subplots(1, 1)
-plt.imshow(np.abs(RangeBin), cmap=cm.jet, extent=[0, t_abs.max()*c/2, 0, RangeBin.shape[0]])     # plot 2-D array and correct range scale
+plt.imshow(np.abs(PhaseCorrected_RangeBin), cmap=cm.jet, extent=[0, t_abs.max()*c/2, 0, PhaseCorrected_RangeBin.shape[0]])     # plot 2-D array and correct range scale
 ax.set_title('Range vs Doppler')
 ax.set_xlabel("Range (m)")
 ax.set_ylabel("Pulse Number")
@@ -145,12 +154,19 @@ ax[1].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 ax[1].yaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
 ax[1].set_title("delayed waveform")
 
-ax[2].plot(R_abs, np.abs(RangeBin[0]))
-ax[2].set_xlabel("Range (m)")
-ax[2].set_ylabel("Amp")
-ax[2].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
-ax[2].yaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
-plt.subplots_adjust(hspace=0.5)
+# ax[2].plot(FT_FFT_freq_x_t_rx, np.abs(FT_FFT_x_t_rx[0, :]), color='r')
+# ax[2].set_xlabel("Range (m)")
+# ax[2].set_ylabel("Amp")
+# ax[2].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
+# ax[2].yaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
+# ax[2].set_title("delayed waveform")
+
+# ax[2].plot(R_abs, np.abs(RangeBin[0]))
+# ax[2].set_xlabel("Range (m)")
+# ax[2].set_ylabel("Amp")
+# ax[2].xaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
+# ax[2].yaxis.set_major_formatter(mtick.FormatStrFormatter('%.2e'))
+# plt.subplots_adjust(hspace=0.5)
 
 # ax[3].plot(t_abs, np.gradient(np.angle(MFO), t_abs))
 # ax[3].set_xlabel("Time (s)")
